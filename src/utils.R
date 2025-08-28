@@ -41,7 +41,7 @@ gt_flex_transform <- function(tbl_summary, as_gt = TRUE, flex_width = NULL, flex
   }
 }
 
-flex_style <- function(flextable, width = NULL, vline = NULL, hline){
+flex_style <- function(flextable, width = NULL, vline = NULL, hline = NULL){
   if(is.null(width)){
     width <- 1
   }

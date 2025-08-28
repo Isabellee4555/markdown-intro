@@ -8,7 +8,6 @@ output:
   prettydoc::html_pretty:
       toc: true
       theme: cayman
-  word_document:
 date: "`r paste0('Reported Date: ', Sys.Date(), '   |   Data Extracted Date: ', params$data_extract_date, '   |   Data Cut-off Date: ', params$cutoff_date)`"
 editor_options: 
   chunk_output_type: console
@@ -37,8 +36,11 @@ source("src/utils.R")
 flextable::set_flextable_defaults(font.family = "Cambria", font.size = 9)
 ```
 
+
 # Data Summary
-```{r data_summary, tab.cap="Table 1 Baseline Demographics and Clinical Characteristics"}
+## second 
+### third
+```{r data_summary, tab.cap="Baseline Demographics and Clinical Characteristics"}
 # create a simulated dataframe
 
 set.seed(123)
@@ -75,7 +77,7 @@ gtsummary::tbl_summary(
 
 # Data Listing
 
-```{r, tab.cap="Table 2 Participant Data Listing"}
+```{r, tab.cap="Participant Data Listing"}
 if(params$as_gt) {
   to_display <- data %>%
     dplyr::slice_head(n = 100) %>% 
@@ -98,7 +100,7 @@ if(params$as_gt) {
 }
 ```
 
-```{r, tab.cap="Table 2 Participant Data Listing"}
+```{r, tab.cap="Participant Data Listing"}
 if(!params$as_gt) {
 # create flextable
 ft <- data %>% 
@@ -129,15 +131,16 @@ ft <- data %>%
     i = ~ age >= 70, j = "age", bg = "orange", part = "body"
   )
 
-ft
+ft %>% 
+  flex_style(width = 0.8)
 }
 ```
 
 # Data Visualization
-```{r, fig.cap="Figure 1 Boxplot of Age Distribution"}
+```{r, fig.cap="Boxplot of Age Distribution"}
 # Create a plotly plot of 
 if(params$as_gt) {
-plot_ly(
+plotly::plot_ly(
   data,
   x = ~sex,
   y = ~age,
@@ -166,7 +169,7 @@ plot_ly(
 
 ```
 
-```{r, fig.cap="Figure 2 Heatmap of Age vs Blood Pressure"}
+```{r, fig.cap="Heatmap of Age vs Blood Pressure"}
 # bin ages and blood pressure
 heat_data <- data %>%
   mutate(
@@ -217,9 +220,10 @@ ggplot(heat_data_clean, aes(x = age_bin, y = bp_bin, fill = n)) +
 - summary tables, 
 - data listings, 
 - interactive visualizations.
+- another one 
 
 # Show Code Chunk
-```{r, echo=TRUE}
+```{r, echo=TRUE, include=FALSE}
 # Example code chunk
 head(data)
 
